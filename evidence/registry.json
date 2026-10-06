@@ -1,0 +1,156 @@
+[
+  {
+    "kind": "ModelConfig",
+    "name": "nemotron-nano-3-30b",
+    "registryRecordId": "aws-bedrock_nemotron-nano-3-30b",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:43:52.146289+00:00"
+  },
+  {
+    "kind": "ModelConfig",
+    "name": "nemotron-nano-9b",
+    "registryRecordId": "aws-bedrock_nemotron-nano-9b",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:44:12.253977+00:00"
+  },
+  {
+    "kind": "ModelConfig",
+    "name": "nemotron-super-120b",
+    "registryRecordId": "aws-bedrock_nemotron-super-120b",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:43:11.368101+00:00"
+  },
+  {
+    "kind": "ModelConfig",
+    "name": "nemotron-super-120b-helper",
+    "registryRecordId": "aws-bedrock_nemotron-super-120b-helper",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:43:32.019537+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "alarm-get-fault",
+    "registryRecordId": "custom_alarm-get-fault",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:47:33.566004+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "aws-knowledge",
+    "registryRecordId": "agentcoregateway_aws-knowledge",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:46:32.547534+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "cluster-status",
+    "registryRecordId": "agentcoregateway_cluster-status",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:48:33.904831+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "cr-author",
+    "registryRecordId": "agentcoregateway_cr-author",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:49:54.314976+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "customer-records",
+    "registryRecordId": "agentcoregateway_customer-records",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:48:13.795069+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "demo-crm-lookup",
+    "registryRecordId": "custom_demo-crm-lookup",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:49:14.105104+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "evidence-lookup",
+    "registryRecordId": "agentcoregateway_evidence-lookup",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:47:53.670096+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "helper-docs",
+    "registryRecordId": "agentcoregateway_helper-docs",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:49:34.195250+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "modaas-docs",
+    "registryRecordId": "custom_modaas-docs",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:46:53.335501+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "network-twin",
+    "registryRecordId": "agentcoregateway_network-twin",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:47:13.464137+00:00"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "runbook-lookup",
+    "registryRecordId": "agentcoregateway_runbook-lookup",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:48:54.009089+00:00"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "customer-experience-agent",
+    "registryRecordId": "awsagentcore_customer-experience-agent",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:49:00.058801+00:00"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "fault-agent",
+    "registryRecordId": "awsagentcore_fault-agent",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:47:59.765597+00:00"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "fault-orchestrator-agent",
+    "registryRecordId": "awsagentcore_fault-orchestrator-agent",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:48:19.866226+00:00"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "hackathon-helper",
+    "registryRecordId": "awsagentcore_hackathon-helper",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:49:20.178027+00:00"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "it-resolution-agent",
+    "registryRecordId": "awsagentcore_it-resolution-agent",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:47:39.540964+00:00"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "my-agent",
+    "registryRecordId": "awsagentcore_my-agent",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:48:39.964958+00:00"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "network-resolution-agent",
+    "registryRecordId": "awsagentcore_network-resolution-agent",
+    "registryApprovalStatus": "APPROVED",
+    "registryLastObserved": "2026-10-06T15:49:40.275096+00:00"
+  }
+]

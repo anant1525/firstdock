@@ -1,0 +1,20 @@
+export CID=customer-experience-agent-1791219069-d92d18
+
+customer-experience-agent  ·  answer
+------------------------------------------------------------------------
+- Impacted customers: Meridian Logistics (CUST-1001), Aurora Health
+Group (CUST-1002), Northwind Retail (CUST-2087), Summit Energy
+(CUST-4455), Pacific Transit Authority (CUST-6201) – all at SITE-DEN-12.
+- Affected service: 5G-SLICE-EDGE-04 (5G edge slice) experiencing
+degraded performance due to fronthaul packet loss; some customers also
+have fiber/SD-WAN services unaffected.
+- Customer communication: Inform them of an ongoing P2 incident
+(INC-4401) affecting the 5G edge slice at SITE-DEN-12, with intermittent
+latency/packet loss causing internet drops; engineering is investigating
+fronthaul CRC errors on DU-DEN-12-A, and a protection path is available.
+Provide updates via their preferred channel and reference complaint IDs
+(e.g., CMP-771, CMP-772, CMP-803, CMP-825) where applicable.
+------------------------------------------------------------------------
+disposition:    undetermined
+correlation_id: customer-experience-agent-1791219069-d92d18
+next:           score-run.py customer-experience-agent-1791219069-d92d18   # evidence for this run

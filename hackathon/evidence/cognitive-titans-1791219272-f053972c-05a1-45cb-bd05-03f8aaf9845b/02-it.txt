@@ -1,0 +1,14 @@
+export CID=it-resolution-agent-1791219302-4c681f
+
+it-resolution-agent  ·  answer
+------------------------------------------------------------------------
+- **Incident disposition**: Undetermined (no matching incident found in
+runbooks or network records).
+- **Action**: Advise customer to perform basic troubleshooting (power
+cycle modem/router, check cables) per customer experience evidence.
+- **Network team input**: Not required at this stage, as no site-wide
+fault or service disruption is indicated.
+------------------------------------------------------------------------
+disposition:    undetermined
+correlation_id: it-resolution-agent-1791219302-4c681f
+next:           score-run.py it-resolution-agent-1791219302-4c681f   # evidence for this run

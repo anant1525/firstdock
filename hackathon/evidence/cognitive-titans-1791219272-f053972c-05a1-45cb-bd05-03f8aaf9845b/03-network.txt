@@ -1,0 +1,16 @@
+export CID=network-resolution-agent-1791219307-cba594
+
+network-resolution-agent  ·  answer
+------------------------------------------------------------------------
+- **Probable root cause**: Customer-premises equipment (CPE) or local
+wiring issue, as no site-wide fault, service disruption, or customer
+impact is indicated in network twin, runbooks, or customer records.
+- **Proposed resolution**: Advise customer to perform basic
+troubleshooting (power cycle modem/router, check cables) and recontact
+support if issue persists.
+- **Risk of the change**: Negligible; troubleshooting steps are non-
+invasive and pose no risk to network or service.
+------------------------------------------------------------------------
+disposition:    auto-resolve
+correlation_id: network-resolution-agent-1791219307-cba594
+next:           score-run.py network-resolution-agent-1791219307-cba594   # evidence for this run

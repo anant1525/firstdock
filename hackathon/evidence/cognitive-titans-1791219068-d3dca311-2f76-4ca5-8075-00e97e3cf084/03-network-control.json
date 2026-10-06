@@ -1,0 +1,9 @@
+{
+  "run_id": "cognitive-titans-1791219068-d3dca311-2f76-4ca5-8075-00e97e3cf084",
+  "sequence": 3,
+  "agent": "network-resolution-agent",
+  "control": "NETWORK_CHANGE_RISK",
+  "threshold_reference": "network_change",
+  "evidence_file": "03-network.txt",
+  "recorded_at": "2026-10-05T16:51:36+00:00"
+}

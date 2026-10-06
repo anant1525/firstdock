@@ -1,0 +1,446 @@
+import json
+import os
+import re
+import urllib.request
+import uuid
+
+import boto3
+from bedrock_agentcore.runtime import BedrockAgentCoreApp
+
+NAME = os.environ.get(
+    "AGENT_NAME",
+    "fault-orchestrator-agent"
+)
+
+REGION = os.environ.get(
+    "AWS_REGION",
+    os.environ.get("AWS_DEFAULT_REGION", "us-east-1")
+)
+
+CUSTOMER_AGENT_ARN = os.environ["CUSTOMER_AGENT_ARN"]
+IT_AGENT_ARN = os.environ["IT_AGENT_ARN"]
+NETWORK_AGENT_ARN = os.environ["NETWORK_AGENT_ARN"]
+
+AUDIT_URL = os.environ.get("AUDIT_URL", "")
+AUDIT_WRITE_TOKEN = os.environ.get("AUDIT_WRITE_TOKEN", "")
+
+CUSTOMER_THRESHOLD = int(
+    os.environ.get("CUSTOMER_THRESHOLD", "3")
+)
+
+app = BedrockAgentCoreApp()
+
+agentcore = boto3.client(
+    "bedrock-agentcore",
+    region_name=REGION
+)
+
+
+def post_audit(cid, step, phase, detail):
+    if not AUDIT_URL:
+        return "AUDIT_URL missing"
+
+    body = {
+        "correlation_id": cid,
+        "step": step,
+        "phase": phase,
+        "actor": NAME,
+        "detail": detail
+    }
+
+    request = urllib.request.Request(
+        AUDIT_URL + "/records",
+        data=json.dumps(body).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+            "X-Audit-Token": AUDIT_WRITE_TOKEN
+        },
+        method="POST"
+    )
+
+    try:
+        urllib.request.urlopen(
+            request,
+            timeout=10
+        ).read()
+        return None
+    except Exception as exc:
+        return f"step {step}: {exc}"
+
+
+def read_response(response):
+    body = response["response"]
+
+    if hasattr(body, "read"):
+        raw = body.read()
+    else:
+        raw = b"".join(body)
+
+    if isinstance(raw, bytes):
+        raw = raw.decode("utf-8")
+
+    return json.loads(raw)
+
+
+def invoke_agent(
+    arn,
+    agent_name,
+    correlation_id,
+    question
+):
+    session_id = (
+        f"{agent_name}-"
+        f"{uuid.uuid4()}-"
+        f"{uuid.uuid4()}"
+    )
+
+    payload = {
+        "correlation_id": correlation_id,
+        "context": {
+            "question": question,
+            "source_agent": NAME,
+            "workflow": "one-customer-one-fault-three-agents"
+        }
+    }
+
+    response = agentcore.invoke_agent_runtime(
+        agentRuntimeArn=arn,
+        runtimeSessionId=session_id,
+        contentType="application/json",
+        accept="application/json",
+        payload=json.dumps(payload).encode("utf-8")
+    )
+
+    return read_response(response)
+
+
+def answer_from(response):
+    if isinstance(response, dict):
+        return str(
+            response.get("answer", response)
+        )
+
+    return str(response)
+
+
+def count_customers(text):
+    customer_ids = set(
+        re.findall(
+            r"\bCUST-[A-Za-z0-9-]+\b",
+            text,
+            flags=re.IGNORECASE
+        )
+    )
+
+    if customer_ids:
+        return len(customer_ids)
+
+    match = re.search(
+        r"\b(\d+)\s+customers?\b",
+        text,
+        flags=re.IGNORECASE
+    )
+
+    return int(match.group(1)) if match else None
+
+
+def extract_risk(text):
+    match = re.search(
+        r"risk(?: of change| level)?\s*[:=-]?\s*"
+        r"(minimal|low|medium|high|critical)",
+        text,
+        flags=re.IGNORECASE
+    )
+
+    if not match:
+        return "unknown"
+
+    risk = match.group(1).lower()
+    return "low" if risk == "minimal" else risk
+
+
+@app.entrypoint
+def invoke(payload):
+    inner = (
+        payload.get("input")
+        if isinstance(payload.get("input"), dict)
+        else payload
+    )
+
+    if "correlation_id" not in inner and "context" not in inner:
+        inner = {"context": inner}
+
+    cid = (
+        inner.get("correlation_id")
+        or f"fault-flow-{uuid.uuid4().hex[:12]}"
+    )
+
+    context = inner.get("context", {})
+
+    question = (
+        context.get("question")
+        or context.get("complaint")
+        or json.dumps(context)
+    )
+
+    site = context.get("site", "SITE-DEN-12")
+    errors = []
+
+    errors.append(
+        post_audit(
+            cid,
+            1,
+            "intent",
+            (
+                "Start governed three-agent workflow; "
+                f"site={site}; "
+                f"customer_threshold={CUSTOMER_THRESHOLD}"
+            )
+        )
+    )
+
+    customer_prompt = f"""
+Correlation ID: {cid}
+
+Customer complaint:
+{question}
+
+Site:
+{site}
+
+Identify:
+1. Impacted customers, including customer IDs
+2. Affected service
+3. Customer impact
+4. Severity
+5. Customer communication
+6. Whether escalation to IT is required
+
+Use only verified customer and service evidence.
+"""
+
+    customer_response = invoke_agent(
+        CUSTOMER_AGENT_ARN,
+        "customer-experience-agent",
+        cid,
+        customer_prompt
+    )
+
+    customer_answer = answer_from(customer_response)
+    customer_count = count_customers(customer_answer)
+
+    customer_control = {
+        "control_id": "CUSTOMER_IMPACT_THRESHOLD",
+        "threshold": CUSTOMER_THRESHOLD,
+        "actual": customer_count,
+        "result": (
+            "PASS"
+            if customer_count is not None
+            and customer_count > CUSTOMER_THRESHOLD
+            else "REVIEW"
+        ),
+        "action": (
+            "ESCALATE_TO_IT"
+            if customer_count is not None
+            and customer_count > CUSTOMER_THRESHOLD
+            else "HUMAN_REVIEW"
+        )
+    }
+
+    errors.append(
+        post_audit(
+            cid,
+            2,
+            "customer-to-it-handoff",
+            json.dumps(customer_control)
+        )
+    )
+
+    it_prompt = f"""
+Correlation ID: {cid}
+
+Customer complaint:
+{question}
+
+Site:
+{site}
+
+Authoritative Customer Experience evidence:
+{customer_answer}
+
+Provide:
+1. Incident disposition
+2. Impacted service
+3. Applicable runbook action
+4. Evidence used from Customer Experience
+5. Whether Network Resolution is required
+6. Reason for the handoff
+
+Do not invent or contradict customer evidence.
+"""
+
+    it_response = invoke_agent(
+        IT_AGENT_ARN,
+        "it-resolution-agent",
+        cid,
+        it_prompt
+    )
+
+    it_answer = answer_from(it_response)
+
+    runbook_found = bool(
+        re.search(
+            r"\brunbook\b|\bRB-[A-Za-z0-9-]+\b",
+            it_answer,
+            flags=re.IGNORECASE
+        )
+    )
+
+    runbook_control = {
+        "control_id": "RUNBOOK_VALIDATION",
+        "result": "PASS" if runbook_found else "REVIEW",
+        "action": (
+            "ESCALATE_TO_NETWORK"
+            if runbook_found
+            else "HUMAN_REVIEW"
+        )
+    }
+
+    errors.append(
+        post_audit(
+            cid,
+            3,
+            "it-to-network-handoff",
+            json.dumps(runbook_control)
+        )
+    )
+
+    network_prompt = f"""
+Correlation ID: {cid}
+
+Site:
+{site}
+
+Authoritative Customer Experience evidence:
+{customer_answer}
+
+Authoritative IT Resolution evidence:
+{it_answer}
+
+Provide:
+1. Impacted service and network element
+2. Probable root cause
+3. Evidence supporting the diagnosis
+4. Proposed remediation
+5. Change risk
+6. Rollback action
+7. Whether human approval is required
+
+Do not invent unavailable alarm or topology evidence.
+"""
+
+    network_response = invoke_agent(
+        NETWORK_AGENT_ARN,
+        "network-resolution-agent",
+        cid,
+        network_prompt
+    )
+
+    network_answer = answer_from(network_response)
+    risk = extract_risk(network_answer)
+
+    risk_control = {
+        "control_id": "NETWORK_CHANGE_RISK",
+        "auto_approval_threshold": "low",
+        "actual": risk,
+        "result": "PASS" if risk == "low" else "REVIEW",
+        "action": (
+            "AUTO_APPROVED"
+            if risk == "low"
+            else "HUMAN_APPROVAL_REQUIRED"
+        )
+    }
+
+    controls = [
+        customer_control,
+        runbook_control,
+        risk_control
+    ]
+
+    overall_result = (
+        "PASS"
+        if all(
+            control["result"] == "PASS"
+            for control in controls
+        )
+        else "REVIEW"
+    )
+
+    errors.append(
+        post_audit(
+            cid,
+            4,
+            "control-evaluation",
+            json.dumps({
+                "overall": overall_result,
+                "controls": controls
+            })
+        )
+    )
+
+    final_answer = f"""INCIDENT CORRELATION
+Correlation ID: {cid}
+Site: {site}
+
+CUSTOMER EXPERIENCE ZONE
+{customer_answer}
+
+IT RESOLUTION ZONE
+{it_answer}
+
+NETWORK RESOLUTION ZONE
+{network_answer}
+
+GOVERNANCE CONTROLS
+- Customer impact threshold: {customer_control['result']} - {customer_control['action']}
+- Runbook validation: {runbook_control['result']} - {runbook_control['action']}
+- Network change risk: {risk_control['result']} - {risk_control['action']}
+
+OVERALL CONTROL RESULT
+{overall_result}
+"""
+
+    errors.append(
+        post_audit(
+            cid,
+            5,
+            "result-inspection",
+            (
+                f"overall_control_result={overall_result}; "
+                "three specialist outputs correlated"
+            )
+        )
+    )
+
+    return {
+        "agent": NAME,
+        "correlation_id": cid,
+        "workflow": "one-customer-one-fault-three-agents",
+        "answer": final_answer,
+        "controls": controls,
+        "overall_control_result": overall_result,
+        "evidence": {
+            "customer_experience": customer_response,
+            "it_resolution": it_response,
+            "network_resolution": network_response
+        },
+        "evidence_errors": [
+            error for error in errors if error
+        ]
+    }
+
+
+if __name__ == "__main__":
+    app.run(
+        port=int(os.environ.get("PORT", "8080"))
+    )

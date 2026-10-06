@@ -1,0 +1,208 @@
+apiVersion: oda.tmforum.org/v1beta1
+kind: AgentConfig
+metadata:
+  annotations:
+    kopf.zalando.org/last-handled-configuration: |
+      {"spec":{"agentCard":{"description":"fault-agent: network-role agent on AgentCore Runtime","protocolBinding":"HTTP+JSON","skills":["fault-resolution","alarm-analysis","rca"]},"agentName":"fault-agent","awsAgentCore":{"containerUri":"245045490405.dkr.ecr.us-east-1.amazonaws.com/a-01-eks-cluster-aws-agent-operator@sha256:cb6d8167d5cf20cff0cc7b991959a94a2b678a00ad75f7a14001e10e3c7de365","environmentVariables":{"AGENT_NAME":"fault-agent","AGENT_ROLE":"network","AUDIT_URL":"http://internal-a53a9d927b53f4da6a6311bc41df1f78-161462874.us-east-1.elb.amazonaws.com:8080","AUDIT_WRITE_TOKEN":"3089d18e3c1fdc410c1476420b62c0d8","STEP_BASE":"0","TOOL_MCP_ALIAS":"alarm-get-fault","TOOL_MCP_URL":"http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/alarm-get-fault"},"lifecycleConfiguration":{"idleRuntimeSessionTimeout":900,"maxLifetime":3600},"networkModeConfig":{"securityGroups":["sg-0acf6b660cf5b537e"],"subnets":["subnet-0850d246916c88b37","subnet-095f3dd9aa4226300","subnet-05e520e5f6e54e523"]},"protocolConfiguration":{"serverProtocol":"HTTP"},"region":"us-east-1"},"credentialProviderType":"NONE","dependsOn":{"models":["nemotron-nano-9b"],"tools":["alarm-get-fault"]},"governance":{"approval":{"required":true,"requiredApprovals":1}},"networkMode":"VPC","paused":false,"provider":"awsAgentCore","safety":{"enforcedAt":"self","enforcerKind":"bedrockGuardrail","enforces":true}},"metadata":{"annotations":{"modaas.tmforum.org/approval-attestation":"fix-1791209310","modaas.tmforum.org/approver":"anant@Cognitive Titans"}}}
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"oda.tmforum.org/v1beta1","kind":"AgentConfig","metadata":{"annotations":{"kopf.zalando.org/last-handled-configuration":"{\"spec\":{\"agentCard\":{\"description\":\"fault-agent: network-role agent on AgentCore Runtime\",\"protocolBinding\":\"HTTP+JSON\",\"skills\":[\"fault-resolution\",\"alarm-analysis\",\"rca\"]},\"agentName\":\"fault-agent\",\"awsAgentCore\":{\"containerUri\":\"245045490405.dkr.ecr.us-east-1.amazonaws.com/a-01-eks-cluster-aws-agent-operator@sha256:cb6d8167d5cf20cff0cc7b991959a94a2b678a00ad75f7a14001e10e3c7de365\",\"environmentVariables\":{\"AGENT_NAME\":\"fault-agent\",\"AGENT_ROLE\":\"network\",\"AUDIT_URL\":\"http://internal-a53a9d927b53f4da6a6311bc41df1f78-161462874.us-east-1.elb.amazonaws.com:8080\",\"AUDIT_WRITE_TOKEN\":\"3089d18e3c1fdc410c1476420b62c0d8\",\"STEP_BASE\":\"0\",\"TOOL_MCP_ALIAS\":\"alarm-get-fault\",\"TOOL_MCP_URL\":\"http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/alarm-get-fault\"},\"lifecycleConfiguration\":{\"idleRuntimeSessionTimeout\":900,\"maxLifetime\":3600},\"networkModeConfig\":{\"securityGroups\":[\"sg-0acf6b660cf5b537e\"],\"subnets\":[\"subnet-0850d246916c88b37\",\"subnet-095f3dd9aa4226300\",\"subnet-05e520e5f6e54e523\"]},\"protocolConfiguration\":{\"serverProtocol\":\"HTTP\"},\"region\":\"us-east-1\"},\"credentialProviderType\":\"NONE\",\"dependsOn\":{\"models\":[\"nemotron-nano-9b\"]},\"governance\":{\"approval\":{\"required\":true,\"requiredApprovals\":1}},\"networkMode\":\"VPC\",\"paused\":false,\"provider\":\"awsAgentCore\",\"safety\":{\"enforcedAt\":\"self\",\"enforcerKind\":\"bedrockGuardrail\",\"enforces\":true}},\"metadata\":{\"annotations\":{\"modaas.tmforum.org/approval-attestation\":\"Reviewed: fault-resolution, alarm-analysis and rca skills verified with approved alarm-get-fault tool\",\"modaas.tmforum.org/approver\":\"anant@Cognitive Titans\"}}}\n","modaas.tmforum.org/approval-attestation":"Reviewed: fault-resolution, alarm-analysis and rca skills verified with approved alarm-get-fault tool","modaas.tmforum.org/approver":"anant@Cognitive Titans"},"creationTimestamp":"2026-10-05T08:59:32Z","finalizers":["kopf.zalando.org/KopfFinalizerMarker"],"generation":2,"name":"fault-agent","namespace":"components","ownerReferences":[{"apiVersion":"oda.tmforum.org/v1","blockOwnerDeletion":true,"controller":false,"kind":"Component","name":"fault-agent","uid":"597fb2a4-9fc4-44c3-ac2c-657475ddf3be"}],"resourceVersion":"578552","uid":"5104aaaa-4d26-472a-bfeb-6a4ed301a801"},"spec":{"agentCard":{"description":"fault-agent: network-role agent on AgentCore Runtime","protocolBinding":"HTTP+JSON","skills":["fault-resolution","alarm-analysis","rca"]},"agentName":"fault-agent","awsAgentCore":{"containerUri":"245045490405.dkr.ecr.us-east-1.amazonaws.com/a-01-eks-cluster-aws-agent-operator@sha256:cb6d8167d5cf20cff0cc7b991959a94a2b678a00ad75f7a14001e10e3c7de365","environmentVariables":{"AGENT_NAME":"fault-agent","AGENT_ROLE":"network","AUDIT_URL":"http://internal-a53a9d927b53f4da6a6311bc41df1f78-161462874.us-east-1.elb.amazonaws.com:8080","AUDIT_WRITE_TOKEN":"3089d18e3c1fdc410c1476420b62c0d8","STEP_BASE":"0","TOOL_MCP_ALIAS":"alarm-get-fault","TOOL_MCP_URL":"http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/alarm-get-fault"},"lifecycleConfiguration":{"idleRuntimeSessionTimeout":900,"maxLifetime":3600},"networkModeConfig":{"securityGroups":["sg-0acf6b660cf5b537e"],"subnets":["subnet-0850d246916c88b37","subnet-095f3dd9aa4226300","subnet-05e520e5f6e54e523"]},"protocolConfiguration":{"serverProtocol":"HTTP"},"region":"us-east-1"},"credentialProviderType":"NONE","dependsOn":{"models":["nemotron-nano-9b"],"tools":["alarm-get-fault"]},"governance":{"approval":{"required":true,"requiredApprovals":1}},"networkMode":"VPC","paused":false,"provider":"awsAgentCore","safety":{"enforcedAt":"self","enforcerKind":"bedrockGuardrail","enforces":true}},"status":{"agentRuntimeArn":"arn:aws:bedrock-agentcore:us-east-1:245045490405:runtime/fault_agent-soAJKcHZxO","agentRuntimeId":"fault_agent-soAJKcHZxO","check_dependency_health":{"healthy":true,"reason":"AllDepsHealthy"},"componentRef":{"name":"fault-agent","namespace":"components","uid":"597fb2a4-9fc4-44c3-ac2c-657475ddf3be"},"conditions":[{"lastTransitionTime":"2026-10-05T09:37:04.611688+00:00","message":"Owned by Component fault-agent","reason":"ComponentLinked","status":"True","type":"OwnedByComponent"},{"lastTransitionTime":"2026-10-05T09:37:04.630943+00:00","message":"IdentityConfig modaas-agentconfig-fault-agent provisioned via Canvas","reason":"IdentityConfigCreated","status":"True","type":"IdentityProvisioned"},{"lastTransitionTime":"2026-10-05T09:37:04.682006+00:00","message":"DependentAPI created; awaiting Canvas canvas-depapi-op resolution","reason":"ResolutionPending","status":"False","type":"DependentAPIProvisioned"},{"lastTransitionTime":"2026-10-05T09:37:04.708263+00:00","message":"VirtualService + AuthorizationPolicy emitted for fault-agent","reason":"IstioReady","status":"True","type":"IstioPerAssetProvisioned"},{"lastTransitionTime":"2026-10-05T09:37:04.708364+00:00","message":"ServiceEntry egress-awsagentcore-us-east-1 created for awsAgentCore in us-east-1","reason":"ServiceEntryCreated","status":"True","type":"EgressAllowlisted"},{"lastTransitionTime":"2026-10-05T10:54:40.198661+00:00","message":"AllDepsHealthy","reason":"AllDepsHealthy","status":"True","type":"DependencyHealthy"},{"lastTransitionTime":"2026-10-05T09:20:03.840042+00:00","message":"Approval predicate satisfied; advancing to provisioning","reason":"ApprovalSatisfied","status":"False","type":"ApprovalRequired"},{"lastTransitionTime":"2026-10-05T09:35:22.916655+00:00","message":"Backend provisioned","reason":"BackendReady","status":"True","type":"Provisioned"},{"lastTransitionTime":"2026-10-05T09:35:25.424789+00:00","message":"Record awsagentcore_fault-agent","reason":"Registered","status":"True","type":"RegistryRegistered"},{"lastTransitionTime":"2026-10-05T10:50:19.425545+00:00","message":"POST /resource → timed out","reason":"TMF639Unreachable","status":"False","type":"TMF639Projected"},{"lastTransitionTime":"2026-10-05T09:35:45.467129+00:00","message":"no registry id available: set spec.registryRef to a Registry CR whose status.registryId is populated, or set REGISTRY_ID on the operator Deployment. REGISTRY_ID is NOT injected into the workload.","reason":"Unresolved","status":"False","type":"RegistryIdResolved"},{"lastTransitionTime":"2026-10-05T09:35:45.467159+00:00","message":"redirected to http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8081 with a gateway credential","reason":"CredentialInjected","status":"True","type":"PerimeterReachable"},{"lastTransitionTime":"2026-10-05T09:35:45.467181+00:00","message":"arn:aws:iam::245045490405:role/a-01-eks-cluster-agentcore-runtime cannot call a governed asset directly; the perimeter is the only path","reason":"NoDirectInvokeCapability","status":"True","type":"ExecutionRoleCapability"}],"dependencyHealthy":true,"dependencyStatus":{"healthy":true,"lastObserved":"2026-10-05T10:54:40.198704+00:00","message":"AllDepsHealthy","reason":"AllDepsHealthy"},"dialectEndpoints":{"agentcore-runtime":"http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/fault-agent"},"driftDetected":false,"driftReason":"","endpoint":"http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/fault-agent","endpointScope":"public","endpoints":{"mesh":"http://modaas-agw.agentgateway-system.svc.cluster.local:8080/mcp/fault-agent","public":"http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/fault-agent"},"executionRoleArn":"arn:aws:iam::245045490405:role/a-01-eks-cluster-agentcore-runtime","globalResourceEndpoint":"http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/fault-agent","governance":{"approvals":[{"at":"2026-10-05T09:20:03.822575+00:00","attestation":"Reviewed: approved tool dependency, network role, and governed runtime configuration verified","role":"modaas-agentconfig-fault-agent-admin","signature":"","subject":"anant@Cognitive Titans"}]},"hostingProvider":"awsAgentCore","lastReconciled":"2026-10-05T09:37:04.725758+00:00","managed":true,"observedGeneration":2,"perimeterReachable":true,"phase":"Approved","reason":"Approved","reconcile":{"message":"no-op: generation unchanged","phase":"Reviewing"},"registryApprovalId":"24b7c300c714425fbe5904e7a06c085c","registryApprovalStatus":"APPROVED","registryLastObserved":"2026-10-05T10:49:59.325853+00:00","registryRecordId":"awsagentcore_fault-agent","registryRecordUid":"QSVDcY0JAKHs","resync_from_registry":{"drift":false,"observed":"APPROVED"},"riskFindings":[],"scan_orphan_records":{"orphans":[],"scanned_crs":6}}}
+    modaas.tmforum.org/approval-attestation: fix-1791209310
+    modaas.tmforum.org/approver: anant@Cognitive Titans
+  creationTimestamp: "2026-10-05T08:59:32Z"
+  finalizers:
+  - kopf.zalando.org/KopfFinalizerMarker
+  generation: 3
+  name: fault-agent
+  namespace: components
+  ownerReferences:
+  - apiVersion: oda.tmforum.org/v1
+    blockOwnerDeletion: true
+    controller: false
+    kind: Component
+    name: fault-agent
+    uid: 597fb2a4-9fc4-44c3-ac2c-657475ddf3be
+  resourceVersion: "666493"
+  uid: 5104aaaa-4d26-472a-bfeb-6a4ed301a801
+spec:
+  agentCard:
+    description: 'fault-agent: network-role agent on AgentCore Runtime'
+    protocolBinding: HTTP+JSON
+    skills:
+    - fault-resolution
+    - alarm-analysis
+    - rca
+  agentName: fault-agent
+  awsAgentCore:
+    containerUri: 245045490405.dkr.ecr.us-east-1.amazonaws.com/a-01-eks-cluster-aws-agent-operator@sha256:cb6d8167d5cf20cff0cc7b991959a94a2b678a00ad75f7a14001e10e3c7de365
+    environmentVariables:
+      AGENT_NAME: fault-agent
+      AGENT_ROLE: network
+      AUDIT_URL: http://internal-a53a9d927b53f4da6a6311bc41df1f78-161462874.us-east-1.elb.amazonaws.com:8080
+      AUDIT_WRITE_TOKEN: 3089d18e3c1fdc410c1476420b62c0d8
+      STEP_BASE: "0"
+      TOOL_MCP_ALIAS: alarm-get-fault
+      TOOL_MCP_URL: http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/alarm-get-fault
+    lifecycleConfiguration:
+      idleRuntimeSessionTimeout: 900
+      maxLifetime: 3600
+    networkModeConfig:
+      securityGroups:
+      - sg-0acf6b660cf5b537e
+      subnets:
+      - subnet-0850d246916c88b37
+      - subnet-095f3dd9aa4226300
+      - subnet-05e520e5f6e54e523
+    protocolConfiguration:
+      serverProtocol: HTTP
+    region: us-east-1
+  credentialProviderType: NONE
+  dependsOn:
+    models:
+    - nemotron-nano-9b
+    tools:
+    - alarm-get-fault
+  governance:
+    approval:
+      required: true
+      requiredApprovals: 1
+  networkMode: VPC
+  paused: false
+  provider: awsAgentCore
+  safety:
+    enforcedAt: self
+    enforcerKind: bedrockGuardrail
+    enforces: true
+status:
+  agentRuntimeArn: arn:aws:bedrock-agentcore:us-east-1:245045490405:runtime/fault_agent-soAJKcHZxO
+  agentRuntimeId: fault_agent-soAJKcHZxO
+  check_dependency_health:
+    healthy: true
+    reason: AllDepsHealthy
+  componentRef:
+    name: fault-agent
+    namespace: components
+    uid: 597fb2a4-9fc4-44c3-ac2c-657475ddf3be
+  conditions:
+  - lastTransitionTime: "2026-10-05T14:09:58.097238+00:00"
+    message: Owned by Component fault-agent
+    reason: ComponentLinked
+    status: "True"
+    type: OwnedByComponent
+  - lastTransitionTime: "2026-10-05T14:09:58.117617+00:00"
+    message: IdentityConfig modaas-agentconfig-fault-agent provisioned via Canvas
+    reason: IdentityConfigCreated
+    status: "True"
+    type: IdentityProvisioned
+  - lastTransitionTime: "2026-10-05T14:09:58.154667+00:00"
+    message: DependentAPI created; awaiting Canvas canvas-depapi-op resolution
+    reason: ResolutionPending
+    status: "False"
+    type: DependentAPIProvisioned
+  - lastTransitionTime: "2026-10-05T14:09:58.183473+00:00"
+    message: VirtualService + AuthorizationPolicy emitted for fault-agent
+    reason: IstioReady
+    status: "True"
+    type: IstioPerAssetProvisioned
+  - lastTransitionTime: "2026-10-05T14:09:58.183552+00:00"
+    message: ServiceEntry egress-awsagentcore-us-east-1 created for awsAgentCore in
+      us-east-1
+    reason: ServiceEntryCreated
+    status: "True"
+    type: EgressAllowlisted
+  - lastTransitionTime: "2026-10-05T14:28:02.005428+00:00"
+    message: AllDepsHealthy
+    reason: AllDepsHealthy
+    status: "True"
+    type: DependencyHealthy
+  - lastTransitionTime: "2026-10-05T09:20:03.840042+00:00"
+    message: Approval predicate satisfied; advancing to provisioning
+    reason: ApprovalSatisfied
+    status: "False"
+    type: ApprovalRequired
+  - lastTransitionTime: "2026-10-05T10:57:42.576815+00:00"
+    message: Backend provisioned
+    reason: BackendReady
+    status: "True"
+    type: Provisioned
+  - lastTransitionTime: "2026-10-05T10:57:45.063370+00:00"
+    message: Record awsagentcore_fault-agent
+    reason: Registered
+    status: "True"
+    type: RegistryRegistered
+  - lastTransitionTime: "2026-10-05T14:23:20.953515+00:00"
+    message: POST /resource → timed out
+    reason: TMF639Unreachable
+    status: "False"
+    type: TMF639Projected
+  - lastTransitionTime: "2026-10-05T10:58:05.107443+00:00"
+    message: 'no registry id available: set spec.registryRef to a Registry CR whose
+      status.registryId is populated, or set REGISTRY_ID on the operator Deployment.
+      REGISTRY_ID is NOT injected into the workload.'
+    reason: Unresolved
+    status: "False"
+    type: RegistryIdResolved
+  - lastTransitionTime: "2026-10-05T10:58:05.107473+00:00"
+    message: redirected to http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8081
+      with a gateway credential
+    reason: CredentialInjected
+    status: "True"
+    type: PerimeterReachable
+  - lastTransitionTime: "2026-10-05T10:58:05.107496+00:00"
+    message: arn:aws:iam::245045490405:role/a-01-eks-cluster-agentcore-runtime cannot
+      call a governed asset directly; the perimeter is the only path
+    reason: NoDirectInvokeCapability
+    status: "True"
+    type: ExecutionRoleCapability
+  dependencyHealthy: true
+  dependencyStatus:
+    healthy: true
+    lastObserved: "2026-10-05T14:28:02.005473+00:00"
+    message: AllDepsHealthy
+    reason: AllDepsHealthy
+  dialectEndpoints:
+    agentcore-runtime: http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/fault-agent
+  driftDetected: false
+  driftReason: ""
+  endpoint: http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/fault-agent
+  endpointScope: public
+  endpoints:
+    mesh: http://modaas-agw.agentgateway-system.svc.cluster.local:8080/mcp/fault-agent
+    public: http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/fault-agent
+  executionRoleArn: arn:aws:iam::245045490405:role/a-01-eks-cluster-agentcore-runtime
+  globalResourceEndpoint: http://a951ac5db922d4985a275ae78a3c2f20-196418229.us-east-1.elb.amazonaws.com:8080/mcp/fault-agent
+  governance:
+    approvals:
+    - at: "2026-10-05T09:20:03.822575+00:00"
+      attestation: 'Reviewed: approved tool dependency, network role, and governed
+        runtime configuration verified'
+      role: modaas-agentconfig-fault-agent-admin
+      signature: ""
+      subject: anant@Cognitive Titans
+    - at: "2026-10-05T10:57:41.586630+00:00"
+      attestation: 'Reviewed: fault-resolution, alarm-analysis and rca skills verified
+        with approved alarm-get-fault tool'
+      role: modaas-agentconfig-fault-agent-admin
+      signature: ""
+      subject: anant@Cognitive Titans
+  hostingProvider: awsAgentCore
+  lastReconciled: "2026-10-05T14:09:58.208820+00:00"
+  managed: true
+  observedGeneration: 3
+  perimeterReachable: true
+  phase: Approved
+  reason: Approved
+  reconcile:
+    message: 'no-op: generation unchanged'
+    phase: Reviewing
+  registryApprovalId: c0c1502caa24471aaca4f5a4e3cec1e3
+  registryApprovalStatus: APPROVED
+  registryLastObserved: "2026-10-05T14:23:00.855169+00:00"
+  registryRecordId: awsagentcore_fault-agent
+  registryRecordUid: QSVDcY0JAKHs
+  resync_from_registry:
+    drift: false
+    observed: APPROVED
+  riskFindings: []
+  scan_orphan_records:
+    orphans: []
+    scanned_crs: 6

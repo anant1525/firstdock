@@ -1,0 +1,67 @@
+# Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+# SPDX-License-Identifier: MIT-0
+#
+# register.yaml — the threshold document template (challenge brief, "What to
+# bring to judging", item 2). One entry per control you build. A control
+# only counts (per the brief) when it has all four parts: a dated threshold,
+# an enforcement point, evidence bound to it, and a control test with a
+# verdict. This file is the first part; evaluate.py in this same directory
+# reads it for the fourth.
+#
+# Fill in one entry per control BEFORE you run the assessed run — the brief's
+# scoring requires the version date to predate the test run, not follow it.
+# Do not backdate; write the real date you declared the threshold.
+#
+# The three named controls from the brief (content/challenge-brief/index.en.md,
+# "The claim, and the three controls you can build"):
+#   7   Event recording  — every in-scope event recorded and joined to one run id
+#   9   Drift             — a live measure against a frozen baseline, per window
+#   16  Spend cap         — input+output tokens, summed per run, against a cap
+
+controls:
+  # One completed control is the floor; a second and third are bonus. Delete
+  # the ones you are not attempting, and delete these comments once you've
+  # read them.
+
+  - control_id: "16"
+    name: "Per-run token spend cap"
+    # The metric evaluate.py computes: how it's derived from evidence.
+    metric: "sum(gen_ai.usage.input_tokens + gen_ai.usage.output_tokens) across every gateway-log record for one run_id"
+    # The limit on a single observation (one run), not a rolling average.
+    observation_limit: 2000
+    # How much a single run may exceed the limit before it counts as a
+    # breach — 0 means any excess breaches.
+    exception_tolerance: 0
+    # Where the number comes from, in one sentence — the honest basis, not
+    # aspirational. If you have not measured a baseline run yet, say so.
+    measurement_basis: "sum of gen_ai.usage.input_tokens + gen_ai.usage.output_tokens over static/starter/answer.py evidence['gateway-log']['records'], filtered to run_id"
+    # Who owns this threshold and responds to a breach — a name or role, not "the team".
+    owner: "Operations Manager"
+    # The date you declared this threshold. Must be earlier than any run you
+    # score against it.
+    version_date: "05-10-2026"
+    # Where the control is enforced. The brief calls out the shared gateway
+    # as the obvious enforcement point; state where you actually check it —
+    # evaluate.py checking the ledger after the fact is EVIDENCE, not
+    # enforcement, unless you also gate the next call on it.
+    enforcement_point: "evaluate.py post-hoc" #(e.g. evaluate.py post-hoc, or an agentgateway rate-limit policy pre-call)"
+
+  - control_id: "7"
+    name: "Event recording coverage"
+    metric: "count(distinct phase per correlation_id) / count(expected phases: intent, invocation, result-inspection) across all three agents"
+    observation_limit: 1.0        # 100% coverage
+    exception_tolerance: 0
+    measurement_basis: "evidence['otel-traces']['records'] grouped by actor, compared against the 3-phase-per-agent shape score-run.py checks"
+    owner: "palak_cognitive_titans"
+    version_date: "2026-10-06"
+    enforcement_point: "evaluate.py post-hoc"
+
+  - control_id: "9"
+    name: "Drift against a frozen baseline"
+    metric: "REPLACE — a diagnostic-quality measure you recompute per run (e.g. disposition-match-rate against score-run.py's expected disposition)"
+    observation_limit: "REPLACE — the acceptable deviation from your frozen baseline"
+    exception_tolerance: 0
+    measurement_basis: "REPLACE — which evidence file(s) this reads and the exact computation"
+    owner: "REPLACE_WITH_YOUR_NAME_OR_ROLE"
+    version_date: "REPLACE_WITH_YYYY-MM-DD"
+    enforcement_point: "REPLACE_WITH_WHERE_YOU_CHECK_THIS"

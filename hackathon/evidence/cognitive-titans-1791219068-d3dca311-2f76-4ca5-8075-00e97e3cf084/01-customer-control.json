@@ -1,0 +1,10 @@
+{
+  "run_id": "cognitive-titans-1791219068-d3dca311-2f76-4ca5-8075-00e97e3cf084",
+  "sequence": 1,
+  "agent": "customer-experience-agent",
+  "control": "CUSTOMER_IMPACT_ASSESSMENT",
+  "threshold_reference": "customer_escalation",
+  "decision": "ESCALATE_TO_IT",
+  "evidence_file": "01-customer.txt",
+  "recorded_at": "2026-10-05T16:51:20+00:00"
+}

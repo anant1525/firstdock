@@ -1,0 +1,9 @@
+{
+  "run_id": "cognitive-titans-1791219272-f053972c-05a1-45cb-bd05-03f8aaf9845b",
+  "sequence": 2,
+  "agent": "it-resolution-agent",
+  "control": "IT_TRIAGE_AND_HANDOFF",
+  "decision": "ESCALATE_TO_NETWORK",
+  "evidence_file": "02-it.txt",
+  "recorded_at": "2026-10-05T16:55:06+00:00"
+}

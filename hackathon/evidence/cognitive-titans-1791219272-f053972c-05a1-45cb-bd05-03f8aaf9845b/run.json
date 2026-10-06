@@ -1,0 +1,7 @@
+{
+  "run_id": "cognitive-titans-1791219272-f053972c-05a1-45cb-bd05-03f8aaf9845b",
+  "started_at": "2026-10-05T16:54:32+00:00",
+  "site": "SITE-UNKNOWN",
+  "complaint": "Customer internet keeps dropping",
+  "threshold_file": "/home/ec2-user/hackathon/thresholds.json"
+}

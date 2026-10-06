@@ -1,0 +1,14 @@
+export CID=customer-experience-agent-1791219273-8aa02a
+
+customer-experience-agent  ·  answer
+------------------------------------------------------------------------
+- No customers are currently recorded as impacted at site SITE-UNKNOWN.
+- No service disruptions or open complaints are associated with this
+site in the customer records.
+- Advise the customer to perform basic troubleshooting (power cycle
+modem/router, check cables) and to contact support again if the issue
+persists, as no site-wide fault is indicated.
+------------------------------------------------------------------------
+disposition:    undetermined
+correlation_id: customer-experience-agent-1791219273-8aa02a
+next:           score-run.py customer-experience-agent-1791219273-8aa02a   # evidence for this run

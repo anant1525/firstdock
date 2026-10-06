@@ -1,0 +1,22 @@
+export CID=network-resolution-agent-1791219086-1663f8
+
+network-resolution-agent  ·  answer
+------------------------------------------------------------------------
+- **Probable root cause**: Fronthaul CRC errors on DU-DEN-12-A upstream
+port eth-1/7 causing packet loss and degraded RSRP (-98 dBm) for
+5G-SLICE-EDGE-04.
+- **Proposed resolution**: Activate protection path eth-1/8 on DU-
+DEN-12-A, monitor for error clearance, then investigate root cause of
+CRC errors (cable, transceiver, or port issue).
+- **Risk of change**: Low; protection path is standby and clean, but
+service interruption possible during switchover if misconfigured.
+
+**Impacted service**: 5G-SLICE-EDGE-04 (5G edge slice) at SITE-DEN-12.
+**Rollback action**: Deactivate protection path and revert to primary
+eth-1/7 if errors persist or new issues arise.
+**Human approval required**: Yes (P2 incident, protection path
+activation).
+------------------------------------------------------------------------
+disposition:    escalate
+correlation_id: network-resolution-agent-1791219086-1663f8
+next:           score-run.py network-resolution-agent-1791219086-1663f8   # evidence for this run

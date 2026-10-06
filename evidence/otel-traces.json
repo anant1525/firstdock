@@ -1,0 +1,159 @@
+{
+  "run_id": "fault-orchestrator-agent-1791301716-ee4e49",
+  "note": "No dedicated OTEL trace backend on this platform build (the collector exports to debug only, see Module 8). This file carries the audit ledger's own correlated chain instead, joined on trace_id/action_id inside each record's detail.",
+  "records": [
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 1,
+      "phase": "intent",
+      "actor": "fault-orchestrator-agent",
+      "detail": "Start governed three-agent workflow; site=SITE-DEN-12; customer_threshold=3",
+      "ts": "2026-10-06T15:48:37Z",
+      "seq": 1791301717430
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": "inv",
+      "phase": "INVOCATION",
+      "actor": "fault-orchestrator-agent",
+      "detail": "model invocation target = customer-experience-agent guardrail = passed",
+      "ts": "2026-10-06T15:48:37Z",
+      "seq": 1791301717435
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 1,
+      "phase": "intent",
+      "actor": "customer-experience-agent",
+      "detail": "trace_id=6f3baa7778144c1a868deb8741d77baf customer analysis via governed model 'nemotron-nano-9b'; tool customer-records",
+      "trace_id": "6f3baa7778144c1a868deb8741d77baf",
+      "ts": "2026-10-06T15:48:38Z",
+      "seq": 1791301718367
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 2,
+      "phase": "invocation",
+      "actor": "customer-experience-agent",
+      "detail": "trace_id=6f3baa7778144c1a868deb8741d77baf governed call via alias nemotron-nano-9b: http_status=200",
+      "trace_id": "6f3baa7778144c1a868deb8741d77baf",
+      "ts": "2026-10-06T15:48:45Z",
+      "seq": 1791301725791
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 3,
+      "phase": "result-inspection",
+      "actor": "customer-experience-agent",
+      "detail": "disposition=escalate, decision='**Summary of Impacted Customers for SITE-DEN-12 Fault:**  \n- **Impacted Customers:** Meridian Logistics (CUST-1001), Aurora Health Group (CUST-1002), Northwind Retail (CUST-2087), and Pacific Transit Authority (CUST-6201) are affected via the **5G-SLICE-EDGE-04** service. Summit Energy (CUST-4455) is not impacted.  \n- **Affected Service:** All impacted customers rely on **5G-SLICE-EDGE-04**, which is experiencing intermittent latency, packet loss, or connectivity issues.  \n- **Customer Impact:** Service disruptions include latency spikes, packet loss, and POS/telematics failures, affecting operations like logistics, healthcare, retail, and transit tracking. Severity is **high** for enterprise-tier customers.  \n- **Communication:** Notify impacted customers via their preferred channel (e.g., email/SMS) about the ongoing issue and expected resolution timeline.  \n- **Escalation:** Required. IT must address the root cause (likely network instability in the 5G edge slice) and validate governance controls for service reliability.'",
+      "trace_id": "6f3baa7778144c1a868deb8741d77baf",
+      "ts": "2026-10-06T15:48:45Z",
+      "seq": 1791301725797
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": "inv",
+      "phase": "INVOCATION",
+      "actor": "fault-orchestrator-agent",
+      "detail": "model invocation target = it-resolution-agent guardrail = passed",
+      "ts": "2026-10-06T15:48:45Z",
+      "seq": 1791301725837
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 4,
+      "phase": "intent",
+      "actor": "it-resolution-agent",
+      "detail": "trace_id=667c9db7e198413db6427f927dc23b15 it analysis via governed model 'nemotron-nano-9b'; tool runbook-lookup",
+      "trace_id": "667c9db7e198413db6427f927dc23b15",
+      "ts": "2026-10-06T15:48:46Z",
+      "seq": 1791301726448
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 5,
+      "phase": "invocation",
+      "actor": "it-resolution-agent",
+      "detail": "trace_id=667c9db7e198413db6427f927dc23b15 governed call via alias nemotron-nano-9b: http_status=200",
+      "trace_id": "667c9db7e198413db6427f927dc23b15",
+      "ts": "2026-10-06T15:48:52Z",
+      "seq": 1791301732550
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 6,
+      "phase": "result-inspection",
+      "actor": "it-resolution-agent",
+      "detail": "disposition=escalate, decision='1. **Incident disposition**: Open (requires network resolution for 5G-SLICE-EDGE-04 instability).  \n2. **Impacted service**: 5G-SLICE-EDGE-04 (experiencing latency/packet loss).  \n3. **Applicable runbook action**: None found in runbooks; escalate to network team for root cause analysis.  \n4. **Evidence used**: Customer impact data from SITE-DEN-12 (Meridian Logistics, Aurora Health Group, etc.) and service disruption details.  \n5. **Network Resolution required**: Yes (to diagnose 5G edge slice instability).  \n6. **Handoff reason**: Runbook lookup returned no actionable steps; network team expertise needed for 5G slice diagnostics.'",
+      "trace_id": "667c9db7e198413db6427f927dc23b15",
+      "ts": "2026-10-06T15:48:52Z",
+      "seq": 1791301732555
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": "3a",
+      "phase": "NEGOTIATION",
+      "actor": "fault-orchestrator-agent",
+      "detail": "cross-domain-negotiation recorded: customer,IT and network domains aligned",
+      "ts": "2026-10-06T15:48:52Z",
+      "seq": 1791301732591
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": "inv",
+      "phase": "INVOCATION",
+      "actor": "fault-orchestrator-agent",
+      "detail": "model invocation target = network-resolution-agent guardrail = passed",
+      "ts": "2026-10-06T15:48:52Z",
+      "seq": 1791301732595
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 7,
+      "phase": "intent",
+      "actor": "network-resolution-agent",
+      "detail": "trace_id=982eedc61c404ecba964a94d60fb777b network analysis via governed model 'nemotron-nano-9b'; tool network-twin",
+      "trace_id": "982eedc61c404ecba964a94d60fb777b",
+      "ts": "2026-10-06T15:48:53Z",
+      "seq": 1791301733509
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 8,
+      "phase": "invocation",
+      "actor": "network-resolution-agent",
+      "detail": "trace_id=982eedc61c404ecba964a94d60fb777b governed call via alias nemotron-nano-9b: http_status=200",
+      "trace_id": "982eedc61c404ecba964a94d60fb777b",
+      "ts": "2026-10-06T15:48:58Z",
+      "seq": 1791301738403
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 9,
+      "phase": "result-inspection",
+      "actor": "network-resolution-agent",
+      "detail": "disposition=escalate, decision='- **Probable root cause**: CRC errors on the fronthaul port (eth-1/7) of DU-DEN-12-A, causing degraded RSRP (-98 dBm) and packet loss (4.2% in last window).  \n- **Proposed resolution**: Replace or repair the faulty fronthaul port (eth-1/7) on DU-DEN-12-A; switch to protection path eth-1/8 if available.  \n- **Risk of change**: Moderate (requires hardware intervention; potential for brief service disruption during replacement).  \n- **Rollback action**: Revert to protection path eth-1/8 if failure occurs during resolution.  \n- **Human approval required**: Yes (hardware changes need network team validation).' | negotiation_with_it=pending-live-negotiation",
+      "trace_id": "982eedc61c404ecba964a94d60fb777b",
+      "ts": "2026-10-06T15:48:58Z",
+      "seq": 1791301738409
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 5,
+      "phase": "result-inspection",
+      "actor": "fault-orchestrator-agent",
+      "detail": "overall_control_result=REVIEW; three specialist outputs correlated",
+      "ts": "2026-10-06T15:48:58Z",
+      "seq": 1791301738447
+    },
+    {
+      "correlation_id": "fault-orchestrator-agent-1791301716-ee4e49",
+      "step": 6,
+      "phase": "DISPOSITION",
+      "actor": "fault-orchestrator-agent",
+      "detail": "disposition=escalate: maintenance freeze in place, named approval required",
+      "ts": "2026-10-06T15:48:58Z",
+      "seq": 1791301738453
+    }
+  ]
+}

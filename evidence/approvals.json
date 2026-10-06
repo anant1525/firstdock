@@ -1,0 +1,156 @@
+[
+  {
+    "kind": "ModelConfig",
+    "name": "nemotron-nano-3-30b",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ModelConfig",
+    "name": "nemotron-nano-9b",
+    "approver": "ec2-user@team",
+    "attestation": "Reviewed: PROMPT_ATTACK filter HIGH on input, Bedrock serverless ON_DEMAND, ec2-user",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ModelConfig",
+    "name": "nemotron-super-120b",
+    "approver": "ec2-user@team",
+    "attestation": "Reviewed: Bedrock serverless ON_DEMAND, Super baseline",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ModelConfig",
+    "name": "nemotron-super-120b-helper",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "alarm-get-fault",
+    "approver": "anant@Cognitive Titans",
+    "attestation": "Reviewed: checked spec, safe for use",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "aws-knowledge",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "cluster-status",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "cr-author",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "customer-records",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "demo-crm-lookup",
+    "approver": "anant@Cognitive Titans",
+    "attestation": "Reviewed: checked spec, safe for use",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "evidence-lookup",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "helper-docs",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "modaas-docs",
+    "approver": "ec2-user@team",
+    "attestation": "Reviewed: public docs corpus, read-only, no egress from the pod",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "network-twin",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "ToolConfig",
+    "name": "runbook-lookup",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "customer-experience-agent",
+    "approver": "ec2-user@team",
+    "attestation": "Reviewed: reference agent on AgentCore",
+    "phase": "Approved"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "fault-agent",
+    "approver": "anant@Cognitive Titans",
+    "attestation": "refresh-mcp-1791216097",
+    "phase": "Approved"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "fault-orchestrator-agent",
+    "approver": "ec2-user@workshop",
+    "attestation": "Reviewed: latest orchestrator changes",
+    "phase": "Approved"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "hackathon-helper",
+    "approver": "system-admin",
+    "attestation": "Approved by the workshop platform at install",
+    "phase": "Approved"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "it-resolution-agent",
+    "approver": "ec2-user@team",
+    "attestation": "Reviewed: model changed to nemotron-nano-9b for cost comparison",
+    "phase": "Approved"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "my-agent",
+    "approver": "ec2-user@workshop",
+    "attestation": "Reviewed: governed gateway path only",
+    "phase": "Approved"
+  },
+  {
+    "kind": "AgentConfig",
+    "name": "network-resolution-agent",
+    "approver": "ec2-user@team",
+    "attestation": "Reviewed: reference agent on AgentCore",
+    "phase": "Approved"
+  }
+]

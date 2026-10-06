@@ -1,0 +1,19 @@
+{
+  "version": "1.0",
+  "declared_at": "2026-10-05T20:49:00+05:30",
+  "controls": {
+    "customer_escalation": {
+      "impacted_customer_threshold": 3,
+      "action_if_exceeded": "ESCALATE_TO_IT"
+    },
+    "network_change": {
+      "auto_approval_risk": ["low"],
+      "action_if_not_allowed": "HUMAN_APPROVAL"
+    },
+    "evidence": {
+      "required_agent_steps": 3,
+      "require_correlation_id": true,
+      "require_agent_response": true
+    }
+  }
+}

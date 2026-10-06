@@ -1,0 +1,15 @@
+export CID=it-resolution-agent-1791219080-47e7ef
+
+it-resolution-agent  ·  answer
+------------------------------------------------------------------------
+- **Incident disposition**: Open (P2 severity) affecting 5G-SLICE-
+EDGE-04 at SITE-DEN-12 due to fronthaul packet loss.
+- **Action per runbook**: Follow RB-EDGE-SLICE-DEGRADATION to
+investigate fronthaul CRC errors on DU-DEN-12-A and validate protection
+path.
+- **Network team requirement**: Confirm protection path status and
+provide root cause analysis for fronthaul CRC errors.
+------------------------------------------------------------------------
+disposition:    undetermined
+correlation_id: it-resolution-agent-1791219080-47e7ef
+next:           score-run.py it-resolution-agent-1791219080-47e7ef   # evidence for this run
