@@ -1,0 +1,16 @@
+apiVersion: oda.tmforum.org/v1beta1
+kind: ToolConfig
+metadata:
+  name: price-check
+  namespace: components
+spec:
+  provider: agentCoreGateway
+  toolType: mcp
+  credentialProviderType: NONE
+  governance:
+    approval:
+      required: true
+      requiredApprovals: 1
+    dataClassification: internal
+  alias: price-check
+  toolName: price-check
